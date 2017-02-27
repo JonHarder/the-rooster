@@ -1,0 +1,25 @@
+<h2>new ingredient</h2>
+
+<% if @ingredient.errors.any? %>
+<div id="error_explanation">
+  <h2>
+    <%= pluralize(@ingredient.errors.count, "error") %> prohibited this ingredient from being created:
+  </h2>
+  <ul>
+    <% @ingredient.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+
+<%= form_for :ingredient, url: ingredients_path do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

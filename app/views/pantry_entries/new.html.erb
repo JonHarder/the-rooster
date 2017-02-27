@@ -1,0 +1,19 @@
+<%= form_for :pantry_entry, url: pantry_entries_path do |f| %>
+<p>
+  <%= f.label :ingredient_id %><br>
+  <%= f.collection_select :ingredient_id, @ingredients, :id, :name %>
+  <%= link_to "New", new_ingredient_path %>
+</p>
+<p>
+  <%= f.label :amount %><br>
+  <%= f.number_field :amount %>
+</p>
+<p>
+  <%= f.label :unit_id %><br>
+  <%= f.collection_select :unit_id, @units, :id, :name %>
+  <%= link_to "New", new_unit_path %>
+</p>
+<p>
+  <%= f.submit %>
+</p>
+<% end %>

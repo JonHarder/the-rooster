@@ -1,0 +1,2 @@
+module PantryEntriesHelper
+end

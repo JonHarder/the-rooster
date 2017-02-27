@@ -1,0 +1,23 @@
+<h1>Pantry</h1>
+
+<table>
+  <tr>
+    <th>Ingredient</th>
+    <th>Amount</th>
+    <th>Units</th>
+    <th></th>
+  </tr>
+  <% @entries.each do |entry| %>
+  <% ingredient = Ingredient.find(entry.ingredient_id) %>
+  <% unit = Unit.find(entry.unit_id) %>
+  <tr>
+    <td><%= ingredient.name %></td>
+    <td><%= entry.amount %></td>
+    <td><%= unit.name %></td>
+    <td><%= link_to "edit", edit_pantry_entry_path(entry) %>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "New", new_pantry_entry_path %>
+  
