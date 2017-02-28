@@ -9,9 +9,18 @@ class PantryEntriesController < ApplicationController
   end
 
   def create
-    @entry = PantryEntry.new(pantry_params)
-    @entry.save
-    redirect_to @entry
+    if ingredient_by_id.nil?
+      @entry = PantryEntry.new(pantry_params)
+      @entry.save
+      redirect_to @entry
+    else
+      entry = PantryEntry.find_by ingredient_id: pantry_params[:ingredient_id]
+      amount = pantry_params[:amount].to_f
+      entry.amount += amount
+      entry.save
+      redirect_to entry
+      return
+    end
   end
 
   def show
@@ -37,5 +46,9 @@ class PantryEntriesController < ApplicationController
 
   def pantry_update_params
     params.require(:pantry_entry).permit(:amount)
+  end
+
+  def ingredient_by_id
+    Ingredient.find(params[:pantry_entry][:ingredient_id])
   end
 end
